@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Kanit', sans-serif; /* ระบุชื่อฟอนต์ */
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20 20px 30px;
+  box-sizing: border-box;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase; /* ทำให้ตัวอักษรเป็นตัวพิมพ์ใหญ่ */
+}
+
+.status.active {
+  background-color: #28a745; /* สีพื้นหลังเขียว */
+  color: white; /* สีตัวอักษรขาว */
+  border: 1px solid #28a745; /* กรอบเขียว */
+}
+
+.status.inactive {
+  background-color: #dc3545; /* สีพื้นหลังแดง */
+  color: white; /* สีตัวอักษรขาว */
+  border: 1px solid #dc3545; /* กรอบแดง */
+}
+
+

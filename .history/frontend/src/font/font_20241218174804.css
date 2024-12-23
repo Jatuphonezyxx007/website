@@ -1,0 +1,6 @@
+@font-face {
+    font-family: 'SFThonburi'; /* ชื่อฟอนต์ที่คุณตั้ง */
+    src: url('./Kanit-Regular.ttf') format('truetype'); /* ระบุเส้นทางของไฟล์ฟอนต์ */
+    font-weight: normal;
+    font-style: normal;
+}

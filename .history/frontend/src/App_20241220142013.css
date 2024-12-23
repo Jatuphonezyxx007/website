@@ -1,0 +1,8 @@
+.container {
+    width: 100%; /* ให้เต็มความกว้างของจอ */
+    max-width: 1200px; /* ความกว้างสูงสุด */
+    margin: 0 auto; /* จัดให้อยู่ตรงกลาง */
+    padding: 0 20px; /* เพิ่มระยะขอบด้านใน */
+    box-sizing: border-box; /* คำนวณขอบ Padding ใน Width */
+    margin-top: 50;
+}
