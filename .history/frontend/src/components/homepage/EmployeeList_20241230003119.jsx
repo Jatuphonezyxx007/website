@@ -240,12 +240,11 @@ const EmployeeList = () => {
                         <Card key={product.id} isPressable shadow="sm">
                             <CardBody className="flex justify-center items-center">
                             <Image
-    src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
+    src={product.image_path ? `/uploads/products${product.image_path}` : "/uploads/products/default.jpg"}
     alt={product.name || "Unnamed Product"}
     className="w-full object-contain h-[140px]"
     radius="lg"
 />
-
                             </CardBody>
                             <CardFooter className="flex flex-col items-center">
                                 <p className="font-bold">{product.name || "Unnamed Product"}</p>

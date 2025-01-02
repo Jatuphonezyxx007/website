@@ -195,7 +195,6 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../api"; // ใช้ API_URL จากไฟล์ api.js
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 import productHeading from "../../assets/products/product_heading.png";
@@ -207,7 +206,7 @@ const EmployeeList = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_URL.FETCH_DATA); // ใช้ API_URL.FETCH_DATA
+                const response = await axios.get("http://localhost/api/fetch_data.php");
                 setProducts(response.data); // บันทึกข้อมูลสินค้า
             } catch (error) {
                 console.error("Error fetching products:", error);
@@ -239,13 +238,12 @@ const EmployeeList = () => {
                     {products.map((product) => (
                         <Card key={product.id} isPressable shadow="sm">
                             <CardBody className="flex justify-center items-center">
-                            <Image
-    src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
-    alt={product.name || "Unnamed Product"}
-    className="w-full object-contain h-[140px]"
-    radius="lg"
-/>
-
+                                <Image
+                                    src={product.image_path || "/images/default-image.png"}
+                                    alt={product.name || "Unnamed Product"}
+                                    className="w-full object-contain h-[140px]"
+                                    radius="lg"
+                                />
                             </CardBody>
                             <CardFooter className="flex flex-col items-center">
                                 <p className="font-bold">{product.name || "Unnamed Product"}</p>

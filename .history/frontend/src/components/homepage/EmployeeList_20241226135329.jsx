@@ -195,7 +195,9 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../api"; // ใช้ API_URL จากไฟล์ api.js
+import { API_URL } from "../../api";
+import "./EmployeeList.css";
+
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 import productHeading from "../../assets/products/product_heading.png";
@@ -204,19 +206,22 @@ const EmployeeList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(API_URL.FETCH_DATA); // ใช้ API_URL.FETCH_DATA
-                setProducts(response.data); // บันทึกข้อมูลสินค้า
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
+    // โหลดภาพทั้งหมดจากโฟลเดอร์ assets/uploads
+    const images = import.meta.glob("../../assets/uploads/*", { eager: true });
 
-        fetchProducts();
+    useEffect(() => {
+        // ดึงข้อมูลสินค้า
+        axios
+            .get(API_URL.FETCH_DATA) // ใช้ URL ของ API
+            .then((response) => {
+                const sorted = response.data.sort((a, b) => a.id - b.id);
+                setProducts(sorted); // บันทึกข้อมูลสินค้า
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error("Error fetching products:", error);
+                setLoading(false);
+            });
     }, []);
 
     if (loading) {
@@ -236,40 +241,31 @@ const EmployeeList = () => {
 
                 {/* Cards Grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    {products.map((product) => (
-                        <Card key={product.id} isPressable shadow="sm">
-                            <CardBody className="flex justify-center items-center">
-                            <Image
-    src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
-    alt={product.name || "Unnamed Product"}
-    className="w-full object-contain h-[140px]"
-    radius="lg"
-/>
+                    {products.map((product) => {
+                        // ค้นหา path ของภาพจาก product.id และ product.img
+                        const imagePath =
+                            images[`../../assets/uploads/${product.id}.${product.img}`]?.default || 
+                            "/images/default-image.png";
 
-                            </CardBody>
-                            <CardFooter className="flex flex-col items-center">
-                                <p className="font-bold">{product.name || "Unnamed Product"}</p>
-                                <p className="text-small text-default-500">
-                                    {product.installation_type || "Unknown"} - {product.screen_size || "Unknown"}
-                                </p>
-                                <p className="text-small text-default-500">
-                                    {product.resolution || "Unknown"}, {product.brightness || 0} nits
-                                </p>
-                                <p className="text-small text-default-500">
-                                    ฿{product.price || 0}
-                                </p>
-                                <p
-                                    className={`text-sm ${
-                                        product.status === "In Stock"
-                                            ? "text-green-500"
-                                            : "text-red-500"
-                                    }`}
-                                >
-                                    {product.status || "Unknown"}
-                                </p>
-                            </CardFooter>
-                        </Card>
-                    ))}
+                        return (
+                            <Card key={product.id} isPressable shadow="sm">
+                                <CardBody className="flex justify-center items-center">
+                                    <Image
+                                        src={imagePath}
+                                        alt={product.name}
+                                        className="w-full object-contain h-[140px]"
+                                        radius="lg"
+                                    />
+                                </CardBody>
+                                <CardFooter className="flex flex-col items-center">
+                                    <p className="font-bold">{product.name}</p>
+                                    <p className="text-small text-default-500">
+                                        {product.type_name}
+                                    </p>
+                                </CardFooter>
+                            </Card>
+                        );
+                    })}
                 </div>
             </div>
         </>

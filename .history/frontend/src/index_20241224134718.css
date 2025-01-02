@@ -6,13 +6,13 @@ body {
   font-family: 'Kanit', sans-serif; /* ระบุชื่อฟอนต์ */
 }
 
-.container {
+/* .container {
   width: 100%;
   max-width: 1200px;
   margin: 20px auto 0;
   padding: 0 20px 30px;
   box-sizing: border-box;
-}
+} */
 
 .text-center {
   text-align: center;
@@ -39,38 +39,4 @@ body {
   border: 1px solid #dc3545; /* กรอบแดง */
 }
 
-.container-img-header {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0px auto 0;
-  padding: 0 0px 0px;
-  box-sizing: border-box;
-
-}
-
-
-
-.grid {
-  display: grid;
-  gap: 20px;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.grid-cols-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-
-.sm\:grid-cols-3 {
-  @media (min-width: 640px) {
-      grid-template-columns: repeat(3, 1fr);
-  }
-}
 

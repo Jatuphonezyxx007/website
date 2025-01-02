@@ -195,7 +195,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../api"; // ใช้ API_URL จากไฟล์ api.js
+import { API_URL } from "../../api"; // อิมพอร์ต API_URL
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 import productHeading from "../../assets/products/product_heading.png";
@@ -205,18 +205,16 @@ const EmployeeList = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(API_URL.FETCH_DATA); // ใช้ API_URL.FETCH_DATA
+        axios
+            .get(API_URL.FETCH_DATA) // ใช้ API_URL
+            .then((response) => {
                 setProducts(response.data); // บันทึกข้อมูลสินค้า
-            } catch (error) {
-                console.error("Error fetching products:", error);
-            } finally {
                 setLoading(false);
-            }
-        };
-
-        fetchProducts();
+            })
+            .catch((error) => {
+                console.error("Error fetching products:", error);
+                setLoading(false);
+            });
     }, []);
 
     if (loading) {
@@ -239,24 +237,23 @@ const EmployeeList = () => {
                     {products.map((product) => (
                         <Card key={product.id} isPressable shadow="sm">
                             <CardBody className="flex justify-center items-center">
-                            <Image
-    src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
-    alt={product.name || "Unnamed Product"}
-    className="w-full object-contain h-[140px]"
-    radius="lg"
-/>
-
-                            </CardBody>
+                                <Image
+                                    src={product.image || "/uploads/default-image.png"}
+                                    alt={product.name || "Unnamed Product"}
+                                    className="w-full object-contain h-[140px]"
+                                    radius="lg"
+                                />
+                            </CardBody>                            
                             <CardFooter className="flex flex-col items-center">
-                                <p className="font-bold">{product.name || "Unnamed Product"}</p>
+                                <p className="font-bold">{product.name}</p>
                                 <p className="text-small text-default-500">
-                                    {product.installation_type || "Unknown"} - {product.screen_size || "Unknown"}
+                                    {product.installation_type} - {product.screen_size}
                                 </p>
                                 <p className="text-small text-default-500">
-                                    {product.resolution || "Unknown"}, {product.brightness || 0} nits
+                                    {product.resolution}, {product.brightness} nits
                                 </p>
                                 <p className="text-small text-default-500">
-                                    ฿{product.price || 0}
+                                    ฿{product.price}
                                 </p>
                                 <p
                                     className={`text-sm ${
@@ -265,7 +262,7 @@ const EmployeeList = () => {
                                             : "text-red-500"
                                     }`}
                                 >
-                                    {product.status || "Unknown"}
+                                    {product.status}
                                 </p>
                             </CardFooter>
                         </Card>

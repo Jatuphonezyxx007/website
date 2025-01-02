@@ -195,8 +195,8 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { API_URL } from "../../api"; // ใช้ API_URL จากไฟล์ api.js
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { API_URL } from "../../api"; // อิมพอร์ต API_URL
 
 import productHeading from "../../assets/products/product_heading.png";
 
@@ -239,13 +239,12 @@ const EmployeeList = () => {
                     {products.map((product) => (
                         <Card key={product.id} isPressable shadow="sm">
                             <CardBody className="flex justify-center items-center">
-                            <Image
-    src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
-    alt={product.name || "Unnamed Product"}
-    className="w-full object-contain h-[140px]"
-    radius="lg"
-/>
-
+                                <Image
+                                    src={product.image_path || "../uploads/products/default-image.png"}
+                                    alt={product.name || "Unnamed Product"}
+                                    className="w-full object-contain h-[140px]"
+                                    radius="lg"
+                                />
                             </CardBody>
                             <CardFooter className="flex flex-col items-center">
                                 <p className="font-bold">{product.name || "Unnamed Product"}</p>

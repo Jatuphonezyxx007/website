@@ -63,11 +63,6 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.grid-cols-4 {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-
 .sm\:grid-cols-3 {
   @media (min-width: 640px) {
       grid-template-columns: repeat(3, 1fr);
