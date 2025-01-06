@@ -1,41 +1,37 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom"; // ใช้ useParams สำหรับดึงข้อมูลจาก URL
 import axios from "axios";
-import { API_URL } from "../../api";
+import { API_URL } from "../../api"; // ใช้ API_URL จากไฟล์ api.js
 
 const ProductDetail = () => {
     const { id } = useParams(); // ดึง id จาก URL
     const [product, setProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchProduct = async () => {
+        const fetchProductDetail = async () => {
             try {
                 const response = await axios.get(`${API_URL.FETCH_DATA}/${id}`);
                 setProduct(response.data);
             } catch (error) {
-                console.error("Error fetching product details:", error);
+                console.error("Error fetching product detail:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
-        fetchProduct();
+        fetchProductDetail();
     }, [id]);
 
-    if (!product) {
-        return <p>Loading product details...</p>;
+    if (loading) {
+        return <p>Loading...</p>;
     }
 
     return (
-        <div className="container">
-            <h1 className="text-3xl font-bold">{product.name}</h1>
-            <img
-                src={`/uploads/products${product.image_path}` || "/images/default-image.png"}
-                alt={product.name || "Unnamed Product"}
-                className="w-full object-contain h-[300px] my-4"
-            />
-            <p>{product.description || "No description available."}</p>
-            <p>Price: ฿{product.price || 0}</p>
-            <p>Status: {product.status || "Unknown"}</p>
-            {/* เพิ่มข้อมูลที่ต้องการ */}
+        <div>
+            <h1>{product.name}</h1>
+            <p>{product.description}</p>
+            {/* แสดงรายละเอียดสินค้าเพิ่มเติมที่ต้องการ */}
         </div>
     );
 };
