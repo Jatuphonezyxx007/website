@@ -1,0 +1,35 @@
+/* กำหนดสไตล์ให้กับภาพหลัก */
+.main-image {
+    width: auto;
+    height: 500px; /* กำหนดความสูงของภาพหลักเป็น 80px */
+    object-fit: cover; /* ให้ภาพเต็มขนาดและไม่เบี้ยว */
+    cursor: pointer; /* เพิ่ม cursor pointer ให้รู้ว่าเป็น clickable */
+}
+
+/* กำหนดสไตล์ให้กับภาพรอง */
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* ให้ภาพรองเต็มขนาด */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* เพิ่มเอฟเฟกต์ขยายภาพเมื่อ hover */
+}
+
+/* เมื่อ hover ที่ภาพรอง จะทำให้ภาพขยาย */
+.thumbnail-image:hover {
+    transform: scale(1.1); /* ขยายภาพรองเล็กน้อย */
+}
+
+/* จัดเรียงรูปภาพใน grid */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* แสดงภาพรอง 4 รูปในแถว */
+    gap: 16px;
+    margin-top: 20px;
+}
+
+/* เพิ่ม padding และระยะห่างของ container */
+.container {
+    padding: 50px;
+    margin-top: 40px;
+}

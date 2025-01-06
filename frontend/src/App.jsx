@@ -132,7 +132,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 // Components
-import EmployeeList from "./components/homepage/EmployeeList";
+import ProductList from "./components/homepage/ProductList";
 import Navbar from "./components/Navbar/Navbar";
 import Layout from "./components/sidebar/Layout";
 import Footer from "./components/Footer/Footer";
@@ -148,7 +148,7 @@ const App = () => {
                     element={
                         <Layout>
                             <Navbar />
-                            <EmployeeList />
+                            <ProductList />
                             <Footer />
                         </Layout>
                     }
