@@ -8,10 +8,12 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1200px;
-  margin: 20px auto 0;
-  padding: 0 20px 30px;
-  box-sizing: border-box;
+  max-width: auto;
+  /* width: 100%;
+  max-width: 1200px; */
+  margin: 10px auto 0;
+  padding: 0 10px 10px;
+  /* box-sizing: border-box; */
 }
 
 .text-center {
@@ -41,11 +43,10 @@ body {
 
 .container-img-header {
   width: 100%;
-  max-width: 1200px;
+  max-width: auto;
   margin: 0px auto 0;
   padding: 0 0px 0px;
   box-sizing: border-box;
-
 }
 
 
